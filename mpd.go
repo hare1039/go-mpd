@@ -26,6 +26,7 @@ type MPD struct {
 	MinBufferTime              *xsd.Duration `xml:"minBufferTime,attr"`
 	SuggestedPresentationDelay *xsd.Duration `xml:"suggestedPresentationDelay,attr"`
 	TimeShiftBufferDepth       *xsd.Duration `xml:"timeShiftBufferDepth,attr"`
+	MaxSegmentDuration         *xsd.Duration `xml:"maxSegmentDuration,attr"`
 	PublishTime                *xsd.DateTime `xml:"publishTime,attr"`
 	Profiles                   string        `xml:"profiles,attr"`
 	BaseURL                    []*BaseURL    `xml:"BaseURL,omitempty"`
@@ -91,7 +92,6 @@ type BaseURL struct {
 
 // AdaptationSet represents XSD's AdaptationSetType.
 type AdaptationSet struct {
-	MimeType                string           `xml:"mimeType,attr"`
 	ContentType             *string          `xml:"contentType,attr"`
 	SegmentAlignment        ConditionalUint  `xml:"segmentAlignment,attr"`
 	SubsegmentAlignment     ConditionalUint  `xml:"subsegmentAlignment,attr"`
@@ -101,6 +101,9 @@ type AdaptationSet struct {
 	Lang                    *string          `xml:"lang,attr"`
 	Par                     *string          `xml:"par,attr"`
 	Codecs                  *string          `xml:"codecs,attr"`
+	MaxWidth                string           `xml:"maxWidth,attr"`
+	MaxHeight               string           `xml:"maxHeight,attr"`
+	MaxFrameRate            string           `xml:"maxFrameRate,attr"`
 	Role                    []*Descriptor    `xml:"Role,omitempty"`
 	BaseURL                 []*BaseURL       `xml:"BaseURL,omitempty"`
 	SegmentTemplate         *SegmentTemplate `xml:"SegmentTemplate,omitempty"`
@@ -111,6 +114,7 @@ type AdaptationSet struct {
 // Representation represents XSD's RepresentationType.
 type Representation struct {
 	ID                 *string          `xml:"id,attr"`
+	MimeType           *string          `xml:"mimeType,attr"`
 	Width              *uint64          `xml:"width,attr"`
 	Height             *uint64          `xml:"height,attr"`
 	FrameRate          *string          `xml:"frameRate,attr"`
